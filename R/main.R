@@ -105,7 +105,7 @@ apply_lm<-function(gene.annotation, gene.counts, repeat.counts, covariates=NULL,
   df<-df[,2:ncol(df)]
   e1<-repeat.counts[,4:ncol(repeat.counts)]
   e1$geneName <- seq.int(nrow(e1))
-  e1 <- e1 %>% select(geneName,everything())
+  e1 <- e1 %>% dplyr::select(geneName,everything())
   count.matrix<-rbind(df,e1)
 
 
@@ -162,11 +162,11 @@ apply_lm<-function(gene.annotation, gene.counts, repeat.counts, covariates=NULL,
       if(r>1){
         formula <- paste(as.character(colnames(output)[1]),"~.",sep = "")
         lm.out<-lm(formula = formula , data=output)
-        l<-list.append(l,lm.out)
+        l<-append(l,lm.out)
       }else if (r==1){
         formula <- paste(as.character(colnames(output)[1]),"~.",sep = "")
         lm.out<-lm(formula = formula , data=output)
-        l<-list.append(list(lm.out))
+        l<-list(lm.out)
       }
     }
 
